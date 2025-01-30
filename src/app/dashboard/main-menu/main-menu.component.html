@@ -1,0 +1,31 @@
+<div class="card flex justify-content-center align-items-center h-screen">
+  <div class="flex flex-column gap-5">
+    <div class="username-form">
+      <label for="username1">Player 1</label>
+      <input
+        pInputText
+        required
+        minlength="4"
+        placeholder="username"
+        [(ngModel)]="username1"
+      />
+    </div>
+
+    <div class="username-form">
+      <label for="username2">Player 2</label>
+      <input
+        pInputText
+        required
+        minlength="4"
+        placeholder="username"
+        [(ngModel)]="username2"
+      />
+    </div>
+
+    <p-button
+      label="Start Game"
+      class="flex justify-content-center"
+      (onClick)="startGame()"
+    />
+  </div>
+</div>
