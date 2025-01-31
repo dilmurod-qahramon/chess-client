@@ -1,6 +1,33 @@
 /* Add this to your styles.css */
-.username-form {
+
+.result {
   display: flex;
-  gap: 10px;
-  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  gap: 50px;
+}
+
+.white-bg, .black-bg {
+  padding: 15px;
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+  font-size: 18px;
+  width: 400px;
+
+  input {
+    border: none;
+    padding: 15px;
+    font-size: 18px;
+    margin: 10px;
+  }
+}
+
+.white-bg {
+  background-color: #f0f0f0;
+  color: black;
+}
+
+.black-bg {
+  background-color: #333;
 }

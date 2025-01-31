@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { RegisterPlayersService } from '../services/register-players.service';
+import { GameService } from '../services/game.service';
 
 @Component({
   selector: 'app-main-menu',
@@ -13,20 +13,21 @@ export class MainMenuComponent {
   username1: string | undefined;
   username2: string | undefined;
 
-  constructor(
-    private router: Router,
-    private register: RegisterPlayersService
-  ) {}
+  constructor(private router: Router, private gameService: GameService) {}
 
   startGame() {
-    const reg = this.register.registerPlayers({
-      username1: this.username1!,
-      username2: this.username2!,
-    });
-    if (reg) {
-      this.router.navigate(['dashboard/board'], {});
-    } else {
-      alert('Error registering players');
+    if (!this.username1 || !this.username2) {
+      alert('Please enter both player names.');
+      return;
     }
+
+    this.gameService
+      .startGame(this.username1, this.username2)
+      .subscribe((response) => {
+        console.log(response);
+        this.router.navigate(['dashboard/board'], {
+          queryParams: { id: response },
+        });
+      });
   }
 }

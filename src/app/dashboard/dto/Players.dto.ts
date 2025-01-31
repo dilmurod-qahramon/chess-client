@@ -1,4 +1,5 @@
 export interface Players {
-  username1: string;
-  username2: string;
+  player1: string;
+  player2: string;
+  id?: number;
 }
