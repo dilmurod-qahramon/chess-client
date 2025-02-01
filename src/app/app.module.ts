@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { provideHttpClient } from '@angular/common/http';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
-import { DashboardModule } from './dashboard/dashboard.module';
+import { DashboardModule } from './lobby/dashboard.module';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 
 @NgModule({
