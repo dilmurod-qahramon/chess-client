@@ -4,9 +4,14 @@ import { NotFoundComponent } from './shared/not-found/not-found.component';
 
 const routes: Routes = [
   {
-    path: 'dashboard',
+    path: '',
+    redirectTo: 'lobby',
+    pathMatch: 'full',
+  },
+  {
+    path: 'lobby',
     loadChildren: () =>
-      import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+      import('./lobby/lobby.module').then((m) => m.LobbyModule),
   },
   {
     path: '**',

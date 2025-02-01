@@ -6,12 +6,12 @@ import { AppComponent } from './app.component';
 import { provideHttpClient } from '@angular/common/http';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
-import { DashboardModule } from './dashboard/dashboard.module';
+import { LobbyModule } from './lobby/lobby.module';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 
 @NgModule({
   declarations: [AppComponent, NotFoundComponent],
-  imports: [BrowserModule, AppRoutingModule, DashboardModule],
+  imports: [BrowserModule, AppRoutingModule, LobbyModule],
   providers: [
     provideHttpClient(),
     provideAnimationsAsync(),

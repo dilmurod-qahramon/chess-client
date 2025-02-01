@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardRoutingModule } from './dashboard-routing.module';
-import { MainMenuComponent } from './main-menu/main-menu.component';
+import { DashboardRoutingModule } from './lobby-routing.module';
+import { StartMenuComponent } from './start-menu/start-menu.component';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { ChessBoardComponent } from './chess-board/chess-board.component';
 
 @NgModule({
-  declarations: [MainMenuComponent, ChessBoardComponent],
+  declarations: [StartMenuComponent, ChessBoardComponent],
   imports: [
     CommonModule,
     ButtonModule,
@@ -17,4 +17,4 @@ import { ChessBoardComponent } from './chess-board/chess-board.component';
     FormsModule,
   ],
 })
-export class DashboardModule {}
+export class LobbyModule {}

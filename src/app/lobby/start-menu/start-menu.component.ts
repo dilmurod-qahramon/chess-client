@@ -6,10 +6,10 @@ import { GameService } from '../services/game.service';
   selector: 'app-main-menu',
   standalone: false,
 
-  templateUrl: './main-menu.component.html',
-  styleUrl: './main-menu.component.scss',
+  templateUrl: './start-menu.component.html',
+  styleUrl: './start-menu.component.scss',
 })
-export class MainMenuComponent {
+export class StartMenuComponent {
   username1: string | undefined;
   username2: string | undefined;
 
