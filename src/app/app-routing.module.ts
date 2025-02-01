@@ -11,7 +11,11 @@ const routes: Routes = [
   {
     path: 'lobby',
     loadChildren: () =>
+<<<<<<< HEAD
       import('./lobby/lobby.module').then((m) => m.LobbyModule),
+=======
+      import('./lobby/dashboard.module').then((m) => m.DashboardModule),
+>>>>>>> d7af360fcb1811d5de9f4b2ffdc176364f050f2a
   },
   {
     path: '**',
