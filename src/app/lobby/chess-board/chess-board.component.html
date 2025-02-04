@@ -1,1 +1,13 @@
-<h1>{{ player1 }} VS {{ player2 }}</h1>
+<div class="container">
+  <app-board-header></app-board-header>
+  <br />
+  <div class="board">
+    <div
+      *ngFor="let block of blocks"
+      class="block"
+      [ngClass]="{ dark: isDark(block.index), light: !isDark(block.index) }"
+    >
+      {{ block.position }}
+    </div>
+  </div>
+</div>

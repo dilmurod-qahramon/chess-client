@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { GameService } from '../services/game.service';
 import { ActivatedRoute } from '@angular/router';
+import { BoardService } from '../services/board.service';
+import { Block } from '../../models/Block.model';
 
 @Component({
   selector: 'app-chess-board',
   standalone: false,
-
   templateUrl: './chess-board.component.html',
   styleUrl: './chess-board.component.scss',
 })
 export class ChessBoardComponent implements OnInit {
-  player1: string | undefined;
-  player2: string | undefined;
   id: number | undefined;
+  blocks: Block[] = [];
 
   constructor(
-    private gameService: GameService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private boardService: BoardService
   ) {}
 
   ngOnInit(): void {
@@ -24,13 +23,12 @@ export class ChessBoardComponent implements OnInit {
       this.id = params['id'];
     });
 
-    if (this.id) {
-      this.gameService.getPlayers(this.id).subscribe((response) => {
-        this.player1 = response.player1;
-        this.player2 = response.player2;
-      });
-    } else {
-      console.error('No game ID found!');
-    }
+    this.blocks = this.boardService.getBlocks();
+  }
+
+  isDark(index: number): boolean {
+    const row = Math.floor(index / 8);
+    const col = index % 8;
+    return (row + col) % 2 !== 0;
   }
 }

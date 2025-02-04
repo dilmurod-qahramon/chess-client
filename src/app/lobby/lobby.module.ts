@@ -6,9 +6,10 @@ import { FormsModule } from '@angular/forms';
 import { ChessBoardComponent } from './chess-board/chess-board.component';
 import { StartMenuComponent } from './start-menu/start-menu.component';
 import { LobbyRoutingModule } from './lobby-routing.module';
+import { BoardHeaderComponent } from './board-header/board-header.component';
 
 @NgModule({
-  declarations: [StartMenuComponent, ChessBoardComponent],
+  declarations: [StartMenuComponent, ChessBoardComponent, BoardHeaderComponent],
   imports: [
     CommonModule,
     ButtonModule,
