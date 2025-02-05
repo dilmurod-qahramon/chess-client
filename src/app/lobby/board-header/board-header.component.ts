@@ -1,36 +1,26 @@
-import { Component } from '@angular/core';
-import { GameService } from '../services/game.service';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { PlayerService } from '../services/player.service';
 
 @Component({
   selector: 'app-board-header',
   standalone: false,
-
   templateUrl: './board-header.component.html',
   styleUrl: './board-header.component.scss',
 })
 export class BoardHeaderComponent {
   player1: string | undefined = 'Player 1';
   player2: string | undefined = 'Player 2';
-  id: number | undefined;
+  @Input({ required: true }) id?: string;
 
-  constructor(
-    private gameService: GameService,
-    private activatedRoute: ActivatedRoute
-  ) {}
+  constructor(private playerService: PlayerService) {}
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe((params) => {
-      this.id = params['id'];
-    });
-
     if (this.id) {
-      this.gameService.getPlayers(this.id).subscribe((response) => {
-        this.player1 = response.player1;
-        this.player2 = response.player2;
+      this.playerService.getPlayer(this.id).subscribe((player) => {
+        console.log(this.id);
+        this.player1 = player.username;
+        this.player2 = player.opponent_username;
       });
-    } else {
-      console.error('No game ID found!');
     }
   }
 }

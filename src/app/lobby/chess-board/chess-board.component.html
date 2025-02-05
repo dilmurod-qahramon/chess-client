@@ -1,5 +1,5 @@
 <div class="container">
-  <app-board-header></app-board-header>
+  <app-board-header [id]="id"></app-board-header>
   <br />
   <div class="board">
     <div
@@ -7,7 +7,7 @@
       class="block"
       [ngClass]="{ dark: isDark(block.index), light: !isDark(block.index) }"
     >
-      {{ block.position }}
+      {{ block.piece ?? "" }}
     </div>
   </div>
 </div>

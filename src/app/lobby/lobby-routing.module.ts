@@ -5,7 +5,7 @@ import { ChessBoardComponent } from './chess-board/chess-board.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'lobby',
     component: StartMenuComponent,
     title: 'Start Menu',
   },

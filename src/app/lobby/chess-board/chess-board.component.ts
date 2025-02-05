@@ -10,7 +10,7 @@ import { Block } from '../../models/Block.model';
   styleUrl: './chess-board.component.scss',
 })
 export class ChessBoardComponent implements OnInit {
-  id: number | undefined;
+  id?: string;
   blocks: Block[] = [];
 
   constructor(
