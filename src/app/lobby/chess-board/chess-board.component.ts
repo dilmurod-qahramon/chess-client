@@ -23,7 +23,11 @@ export class ChessBoardComponent implements OnInit {
       this.id = params['id'];
     });
 
-    this.blocks = this.boardService.getBlocks();
+    this.blocks = this.boardService.getBlocks;
+  }
+
+  movePiece(block: Block) {
+    console.log(block);
   }
 
   isDark(index: number): boolean {

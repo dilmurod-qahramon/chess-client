@@ -17,7 +17,6 @@ export class BoardHeaderComponent {
   ngOnInit(): void {
     if (this.id) {
       this.playerService.getPlayer(this.id).subscribe((player) => {
-        console.log(this.id);
         this.player1 = player.username;
         this.player2 = player.opponent_username;
       });

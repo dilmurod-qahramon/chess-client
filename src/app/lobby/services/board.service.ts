@@ -11,8 +11,8 @@ export class BoardService {
     this.generateBoard();
   }
 
-  getBlocks(): Block[] {
-    return [...this.blocks];
+  get getBlocks(): Block[] {
+    return this.blocks;
   }
 
   generateBoard() {
