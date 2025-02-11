@@ -5,6 +5,11 @@ import { NotFoundComponent } from './shared/not-found/not-found.component';
 const routes: Routes = [
   {
     path: '',
+    redirectTo: 'chess',
+    pathMatch: 'full',
+  },
+  {
+    path: 'chess',
     loadChildren: () =>
       import('./lobby/lobby.module').then((m) => m.LobbyModule),
   },

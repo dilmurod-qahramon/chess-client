@@ -1,16 +1,7 @@
-<div class="container">
-  <header>
-    <app-board-header [id]="id"></app-board-header>
-  </header>
-  <div class="body">
-    <div class="left-panel">
-      <!-- try to use <aside>
-        utilize <porgress> to show how much time does user has
-        use <picture> tag to show pictures of each piece
-        -->
-      <app-left-panel></app-left-panel>
-    </div>
-    <div class="board">
+<div class="body">
+  <app-left-panel [sessionId]="sessionId"></app-left-panel>
+  <div class="chess-container">
+    <div class="row-labels">
       <h2>a</h2>
       <h2>b</h2>
       <h2>c</h2>
@@ -19,14 +10,32 @@
       <h2>f</h2>
       <h2>g</h2>
       <h2>h</h2>
-      <div
-        *ngFor="let block of blocks"
-        class="block"
-        [ngClass]="{ dark: isDark(block.index), light: !isDark(block.index) }"
-      >
-        <button (click)="movePiece(block)">
-          {{ block.piece ?? "" }}
-        </button>
+    </div>
+    <div class="board-container">
+      <div class="column-labels">
+        <h2>8</h2>
+        <h2>7</h2>
+        <h2>6</h2>
+        <h2>5</h2>
+        <h2>4</h2>
+        <h2>3</h2>
+        <h2>2</h2>
+        <h2>1</h2>
+      </div>
+      <div class="board">
+        <div
+          *ngFor="let block of blocks"
+          class="block"
+          [ngClass]="{ dark: isDark(block.index), light: !isDark(block.index) }"
+        >
+          <button>
+            <img
+              *ngIf="getPieceIcon(block.piece!)"
+              [src]="getPieceIcon(block.piece!)"
+              alt="{{ block.piece }}"
+            />
+          </button>
+        </div>
       </div>
     </div>
   </div>

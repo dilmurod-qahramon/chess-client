@@ -5,6 +5,11 @@ import { ChessBoardComponent } from './chess-board/chess-board.component';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'lobby',
+    pathMatch: 'full',
+  },
+  {
     path: 'lobby',
     component: StartMenuComponent,
     title: 'Start Menu',

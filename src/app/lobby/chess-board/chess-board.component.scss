@@ -1,50 +1,69 @@
-.container {
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  gap: 10vw;
+  box-sizing: border-box;
+  overflow-x: auto;
+}
+
+app-left-panel {
+  width: 20vw;
+  height: 80vh;
+}
+
+.chess-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  .body {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    width: 100%;
-  }
-
-  .left-panel {
-    position: absolute;
-    left: 0;
-    width: 400px;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .board {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    padding: 10px;
-  }
-
-  .block {
-    width: 80px;
-    height: 80px;
-    font-size: 35px;
-  }
-
 }
 
-h2 {
-  margin: auto;
+.row-labels {
+  display: flex;
+  width: 90vmin;
+  max-width: 100vh;
+  text-align: center;
+
+  h2 {
+    margin: auto;
+  }
 }
 
-button {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  border-style: none;
-  cursor: grab;
+.board-container {
+  display: flex;
+  align-items: center;
+}
+
+.column-labels {
+  display: grid;
+  grid-template-rows: repeat(8, 1fr);
+  height: 90vmin;
+  max-height: 100vh;
+  width: 5vmin;
+
+  h2 {
+    display: flex;
+    align-items: center;
+    margin: 0;
+  }
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  width: 90vmin;
+  height: 90vmin;
+  max-width: 100vh;
+  max-height: 100vh;
+}
+
+.block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .dark {
@@ -53,4 +72,22 @@ button {
 
 .light {
   background-color: #d8d8d7;
+}
+
+button {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  cursor: grab;
+  font-weight: bold;
+
+  img {
+    width: 90%;
+  }
+
+  &:hover {
+    border: 2px solid black;
+  }
 }

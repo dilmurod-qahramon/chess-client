@@ -1,5 +1,13 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { PlayerService } from '../services/player.service';
+import { TimeService } from '../services/time.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-board-header',
@@ -7,18 +15,30 @@ import { PlayerService } from '../services/player.service';
   templateUrl: './board-header.component.html',
   styleUrl: './board-header.component.scss',
 })
-export class BoardHeaderComponent {
-  player1: string | undefined = 'Player 1';
-  player2: string | undefined = 'Player 2';
-  @Input({ required: true }) id?: string;
+export class BoardHeaderComponent implements OnChanges, OnInit {
+  leftPlayer: string | undefined = 'Left Player';
+  rightPlayer: string | undefined = 'Right Player';
+  time$?: Observable<string>;
+  @Input({ required: true }) leftPlayerId?: string;
+  @Input({ required: true }) rightPlayerId?: string;
 
-  constructor(private playerService: PlayerService) {}
+  constructor(
+    private playerService: PlayerService,
+    private timeService: TimeService
+  ) {}
 
   ngOnInit(): void {
-    if (this.id) {
-      this.playerService.getPlayer(this.id).subscribe((player) => {
-        this.player1 = player.username;
-        this.player2 = player.opponent_username;
+    this.time$ = this.timeService.getTimeObservable();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.leftPlayerId && this.rightPlayerId) {
+      this.playerService.getPlayer(this.leftPlayerId).subscribe((player) => {
+        this.leftPlayer = player.username;
+      });
+
+      this.playerService.getPlayer(this.rightPlayerId).subscribe((player) => {
+        this.rightPlayer = player.username;
       });
     }
   }

@@ -1,5 +1,22 @@
 <div>
-  <h1>Moves</h1>
-  <h2>From __ to __</h2>
-  <h2>Black or White</h2>
+  <app-board-header
+    [leftPlayerId]="leftPlayerId"
+    [rightPlayerId]="rightPlayerId"
+  ></app-board-header>
+  <div class="container">
+    <h1>Move Turn: {{ turn === "left" ? "White" : "Black" }}</h1>
+    <form (ngSubmit)="onSubmit()">
+      <label for="from">From: </label>
+      <input
+        type="text"
+        name="from"
+        [(ngModel)]="moveFrom"
+        placeholder="Ex: a7"
+      />
+      <label for="to">To: </label>
+      <input type="text" name="to" [(ngModel)]="moveTo" placeholder="Ex: a5" />
+      <br />
+      <p-button type="submit" [style]="{ width: '100%' }">Move</p-button>
+    </form>
+  </div>
 </div>

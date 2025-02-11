@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MoveService } from './move.service';
+import { GameTurnService } from './game-turn.service';
 
-describe('MoveService', () => {
-  let service: MoveService;
+describe('GameTurnService', () => {
+  let service: GameTurnService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(MoveService);
+    service = TestBed.inject(GameTurnService);
   });
 
   it('should be created', () => {
