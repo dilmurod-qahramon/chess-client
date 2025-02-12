@@ -9,12 +9,15 @@ import { GameTurnAction } from '../../models/GameTurnAction.enum';
 })
 export class GameTurnService {
   constructor(private httpClient: HttpClient) {}
-  createGameTurn(sessionId: string, playerId: string, action: GameTurnAction) {
-    console.log(action);
-    return this.httpClient.post<GameTurn>(`${apiUrl}/gameturns`, {
-      sessionId: sessionId,
+  createGameTurn(
+    sessionId: string,
+    playerId: string,
+    actions: GameTurnAction[]
+  ) {
+    return this.httpClient.post<GameTurn>(`${apiUrl}/game-turn`, {
+      gameSessionId: sessionId,
       playerId: playerId,
-      action: action,
+      actions: actions,
     });
   }
 }

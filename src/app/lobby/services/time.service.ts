@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class TimeService {
-  private time$ = new BehaviorSubject<string>(this.currentTime(0));
+  private time$ = new BehaviorSubject<number>(this.currentTime(0));
   constructor() {
     this.startClock();
   }
@@ -15,17 +15,14 @@ export class TimeService {
   }
 
   private startClock() {
-    let ind = 59;
+    let ind = 1;
     setInterval(() => {
       this.time$.next(this.currentTime(ind));
-      ind--;
+      ind++;
     }, 1000);
   }
 
   private currentTime(ind: number) {
-    if (ind < 10) {
-      return `00:0${ind}`;
-    }
-    return `00:${ind}`;
+    return ind;
   }
 }

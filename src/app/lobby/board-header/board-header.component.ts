@@ -18,7 +18,7 @@ import { Observable } from 'rxjs';
 export class BoardHeaderComponent implements OnChanges, OnInit {
   leftPlayer: string | undefined = 'Left Player';
   rightPlayer: string | undefined = 'Right Player';
-  time$?: Observable<string>;
+  time$?: Observable<number>;
   @Input({ required: true }) leftPlayerId?: string;
   @Input({ required: true }) rightPlayerId?: string;
 

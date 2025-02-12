@@ -27,7 +27,8 @@ export class StartMenuComponent implements OnDestroy {
   constructor(
     private router: Router,
     private playerService: PlayerService,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private boardService: BoardService
   ) {}
 
   startGame() {
@@ -50,8 +51,9 @@ export class StartMenuComponent implements OnDestroy {
         }),
         takeUntil(this.destroy$)
       )
-      .subscribe((res) => {
-        this.session_id = res.id;
+      .subscribe((session) => {
+        this.session_id = session.id;
+        // this.boardService.updatePiecePlacement(session.fieldState);
         this.router.navigate(['chess/board'], {
           queryParams: { id: this.session_id },
         });

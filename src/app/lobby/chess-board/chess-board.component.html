@@ -30,8 +30,8 @@
         >
           <button>
             <img
-              *ngIf="getPieceIcon(block.piece!)"
-              [src]="getPieceIcon(block.piece!)"
+              *ngIf="block.iconUrl"
+              [src]="block.iconUrl"
               alt="{{ block.piece }}"
             />
           </button>

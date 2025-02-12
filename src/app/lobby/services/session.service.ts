@@ -19,4 +19,19 @@ export class SessionService {
   getSession(id: string) {
     return this.httpClient.get<GameSession>(`${apiUrl}/sessions/${id}`);
   }
+
+  updateSession(
+    id: string,
+    nextTurnForPlayer: 'left' | 'right',
+    moveFrom: string,
+    moveTo: string,
+    turnDuration: number
+  ) {
+    return this.httpClient.patch(`${apiUrl}/sessions/${id}`, {
+      nextTurnForPlayer,
+      moveFrom,
+      moveTo,
+      turnDuration,
+    });
+  }
 }

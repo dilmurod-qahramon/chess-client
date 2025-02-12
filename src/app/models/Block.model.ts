@@ -1,7 +1,8 @@
+import { GameActor } from './GameActor.model';
+
 export interface Block {
-  //capital letters for white pieces, lowercase for black pieces
-  //'p' | 'n' | 'b' | 'r' | 'q' | 'k' | 'P' | 'N' | 'B' | 'R' | 'Q' | 'K';
-  piece?: string;
-  position: string; // e.g. 'a1', 'h8'
   index: number;
+  gameActor?: GameActor | null;
+  piece?: string;
+  iconUrl: string | null;
 }

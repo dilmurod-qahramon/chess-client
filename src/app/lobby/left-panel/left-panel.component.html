@@ -4,7 +4,7 @@
     [rightPlayerId]="rightPlayerId"
   ></app-board-header>
   <div class="container">
-    <h1>Move Turn: {{ turn === "left" ? "White" : "Black" }}</h1>
+    <h1>Move Turn: {{ nextTurn === "left" ? "White" : "Black" }}</h1>
     <form (ngSubmit)="onSubmit()">
       <label for="from">From: </label>
       <input
@@ -12,9 +12,16 @@
         name="from"
         [(ngModel)]="moveFrom"
         placeholder="Ex: a7"
+        maxlength="2"
       />
       <label for="to">To: </label>
-      <input type="text" name="to" [(ngModel)]="moveTo" placeholder="Ex: a5" />
+      <input
+        type="text"
+        name="to"
+        [(ngModel)]="moveTo"
+        placeholder="Ex: a5"
+        maxlength="2"
+      />
       <br />
       <p-button type="submit" [style]="{ width: '100%' }">Move</p-button>
     </form>

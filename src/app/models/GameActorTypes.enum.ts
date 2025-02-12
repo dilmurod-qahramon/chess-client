@@ -4,5 +4,5 @@ export enum GameActorTypes {
   Rook = 2,
   Bishop = 3,
   Knight = 4,
-  Pawn = 6,
+  Pawn = 5,
 }
