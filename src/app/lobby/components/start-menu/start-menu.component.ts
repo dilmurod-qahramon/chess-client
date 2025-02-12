@@ -1,8 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { PlayerService } from '../services/player.service';
-import { BoardService } from '../services/board.service';
-import { SessionService } from '../services/session.service';
+import { PlayerService } from '../../services/player.service';
+import { SessionService } from '../../services/session.service';
 import {
   catchError,
   EMPTY,
@@ -27,8 +26,7 @@ export class StartMenuComponent implements OnDestroy {
   constructor(
     private router: Router,
     private playerService: PlayerService,
-    private sessionService: SessionService,
-    private boardService: BoardService
+    private sessionService: SessionService
   ) {}
 
   startGame() {
@@ -53,7 +51,6 @@ export class StartMenuComponent implements OnDestroy {
       )
       .subscribe((session) => {
         this.session_id = session.id;
-        // this.boardService.updatePiecePlacement(session.fieldState);
         this.router.navigate(['chess/board'], {
           queryParams: { id: this.session_id },
         });

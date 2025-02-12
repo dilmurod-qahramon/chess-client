@@ -5,8 +5,8 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { PlayerService } from '../services/player.service';
-import { TimeService } from '../services/time.service';
+import { PlayerService } from '../../services/player.service';
+import { TimeService } from '../../services/time.service';
 import { Observable } from 'rxjs';
 
 @Component({

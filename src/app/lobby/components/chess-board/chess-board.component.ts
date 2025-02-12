@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BoardService } from '../services/board.service';
-import { SessionService } from '../services/session.service';
-import { GameFieldState } from '../../models/GameFieldState.model';
-import { Block } from '../../models/Block.model';
-import { GameActorTypes } from '../../models/GameActorTypes.enum';
-import { GameActor } from '../../models/GameActor.model';
-import { catchError, EMPTY, throwError } from 'rxjs';
+import { SessionService } from '../../services/session.service';
+import { GameFieldState } from '../../../models/GameFieldState.model';
+import { Block } from '../../../models/Block.model';
+import { catchError, EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-chess-board',

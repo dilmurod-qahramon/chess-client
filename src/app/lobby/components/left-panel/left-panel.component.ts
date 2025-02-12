@@ -6,11 +6,11 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { SessionService } from '../services/session.service';
-import { GameTurnService } from '../services/game-turn.service';
-import { GameTurnAction } from '../../models/GameTurnAction.enum';
+import { SessionService } from '../../services/session.service';
+import { GameTurnService } from '../../services/game-turn.service';
+import { GameTurnAction } from '../../../models/GameTurnAction.enum';
 import { catchError, EMPTY, Subject, takeUntil } from 'rxjs';
-import { TimeService } from '../services/time.service';
+import { TimeService } from '../../services/time.service';
 
 @Component({
   selector: 'app-left-panel',
