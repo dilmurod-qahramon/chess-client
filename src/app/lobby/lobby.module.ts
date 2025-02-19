@@ -8,6 +8,7 @@ import { StartMenuComponent } from './components/start-menu/start-menu.component
 import { LobbyRoutingModule } from './lobby-routing.module';
 import { BoardHeaderComponent } from './components/board-header/board-header.component';
 import { LeftPanelComponent } from './components/left-panel/left-panel.component';
+import { IconPathPipe } from './pipes/icon-path.pipe';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { LeftPanelComponent } from './components/left-panel/left-panel.component
     ChessBoardComponent,
     BoardHeaderComponent,
     LeftPanelComponent,
+    IconPathPipe,
   ],
   imports: [
     CommonModule,

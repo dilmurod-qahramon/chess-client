@@ -10,7 +10,7 @@
         required
         minlength="4"
         placeholder="username"
-        [(ngModel)]="username"
+        [(ngModel)]="leftPlayer"
       />
     </div>
     <div class="black-bg">
@@ -22,11 +22,13 @@
         required
         minlength="4"
         placeholder="username"
-        [(ngModel)]="opponent_username"
+        [(ngModel)]="rightPlayer"
       />
     </div>
   </div>
-
+  <h2 *ngIf="errorMesage">
+    {{ errorMesage }}
+  </h2>
   <p-button
     label="Start Game"
     [variant]="'outlined'"

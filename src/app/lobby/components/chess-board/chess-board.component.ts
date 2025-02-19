@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { SessionService } from '../../services/session.service';
-import { GameFieldState } from '../../../models/GameFieldState.model';
-import { Block } from '../../../models/Block.model';
-import { catchError, EMPTY } from 'rxjs';
+import { map, Observable, switchMap } from 'rxjs';
+import { GameFieldState } from '../../../types/GameFieldState.model';
+import { ChessBoardContext } from '../../../types/ChessboardContext.interface';
+import { GameTurnActions } from '../../../types/GameTurnAction.enum';
+import { GameSessionDto } from '../../dto/game-session.dto';
 
 @Component({
   selector: 'app-chess-board',
@@ -12,60 +14,62 @@ import { catchError, EMPTY } from 'rxjs';
   styleUrl: './chess-board.component.scss',
 })
 export class ChessBoardComponent implements OnInit {
-  fieldState?: GameFieldState;
-  blocks: Block[] = [];
+  data$?: Observable<ChessBoardContext>;
   sessionId?: string;
+  errorMessage?: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private sessionService: SessionService,
-    private router: Router
+    private sessionService: SessionService
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe((params) => {
-      this.sessionId = params['id'];
-    });
-
-    if (this.sessionId) {
-      this.sessionService
-        .getSession(this.sessionId!)
-        .pipe(
-          catchError((err) => {
-            alert(err);
-            this.router.navigate(['chess/lobby']);
-            return EMPTY;
-          })
-        )
-        .subscribe((session) => {
-          this.fieldState = session.fieldState;
-          this.generateBoard();
-        });
-    }
+    this.data$ = this.activatedRoute.queryParams.pipe(
+      map((params) => params['id']),
+      switchMap((sessionId) => {
+        this.sessionId = sessionId;
+        return this.sessionService.getSession(sessionId);
+      }),
+      map((sessionDto) => {
+        return this.buildChessBoardContext(sessionDto);
+      })
+    );
   }
 
-  generateBoard() {
-    this.blocks = [];
-    for (let i = 0; i < 8; i++) {
-      for (let j = 0; j < 8; j++) {
-        const gameActor = this.fieldState![i][j] ?? null;
-        let block: Block = {
-          index: i * 8 + j,
-          gameActor: gameActor,
-          iconUrl: gameActor
-            ? `chess-icons/${gameActor.team === 'black' ? 'black-' : ''}${
-                gameActor.type
-              }.svg`
-            : null,
-        };
-        this.blocks.push(block);
-      }
-    }
+  private buildChessBoardContext(sessionDto: GameSessionDto) {
+    const pageContext: ChessBoardContext = {
+      sessionInfo: this.getChessBoardGameState(sessionDto),
+      submitAction: (event: { from: string; to: string }) => {
+        const gameTurnActions: GameTurnActions = [
+          {
+            type: 'move',
+            oldPlace: event.from,
+            newPlace: event.to,
+          },
+          null,
+          null,
+        ];
+
+        const updatedSession = this.sessionService
+          .updateSessionAndCreateActions(this.sessionId!, gameTurnActions)
+          .pipe(
+            map((updatedSession) => {
+              return updatedSession;
+            })
+          );
+      },
+    };
+
+    return pageContext;
   }
 
-  isDark(index: number): boolean {
-    const row = Math.floor(index / 8);
-    const col = index % 8;
-    return (row + col) % 2 !== 0;
+  private getChessBoardGameState(sessionDto: GameSessionDto): {
+    currentTurn: 'left' | 'right';
+    fieldState: GameFieldState;
+  } {
+    return {
+      currentTurn: sessionDto.currentTurn,
+      fieldState: sessionDto.fieldState,
+    };
   }
 }

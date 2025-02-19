@@ -1,3 +1,3 @@
-export const apiUrl = 'http://localhost:3000/api';
-export const default_piece_placement: string =
-  'rnbqkbnrppppppppeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeePPPPPPPPRNBQKBNR';
+export const API_URL = 'http://localhost:3000/api';
+export const ONE_SEC = 1000;
+export const ONE_MIN = 59;

@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { apiUrl } from '../../constants';
-import { GameSession } from '../dto/session.dto';
+import { API_URL } from '../../constants';
+import { GameSessionDto } from '../dto/game-session.dto';
+import { GameTurnActions } from '../../types/GameTurnAction.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -10,28 +11,28 @@ export class SessionService {
   constructor(private httpClient: HttpClient) {}
 
   initSession(leftPlayerId: string, rightPlayerId: string) {
-    return this.httpClient.post<GameSession>(`${apiUrl}/sessions`, {
-      leftPlayerId,
-      rightPlayerId,
-    });
+    return this.httpClient.post(
+      `${API_URL}/sessions`,
+      {
+        leftPlayerId,
+        rightPlayerId,
+      },
+      { responseType: 'text' }
+    );
   }
 
-  getSession(id: string) {
-    return this.httpClient.get<GameSession>(`${apiUrl}/sessions/${id}`);
+  getSession(sessionId: string) {
+    return this.httpClient.get<GameSessionDto>(
+      `${API_URL}/sessions/${sessionId}`
+    );
   }
 
-  updateSession(
-    id: string,
-    nextTurnForPlayer: 'left' | 'right',
-    moveFrom: string,
-    moveTo: string,
-    turnDuration: number
-  ) {
-    return this.httpClient.patch(`${apiUrl}/sessions/${id}`, {
-      nextTurnForPlayer,
-      moveFrom,
-      moveTo,
-      turnDuration,
-    });
+  updateSessionAndCreateActions(sessionId: string, actions: GameTurnActions) {
+    return this.httpClient.post<GameSessionDto>(
+      `${API_URL}/sessions/${sessionId}/actions`,
+      {
+        actions: actions,
+      }
+    );
   }
 }

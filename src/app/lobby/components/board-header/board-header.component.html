@@ -1,6 +1,6 @@
 <div class="board-header">
   <h1>{{ leftPlayer }} VS {{ rightPlayer }}</h1>
-  <h2 *ngIf="time$ | async as time">
+  <h2 *ngIf="time$ | async as time" [class.timer]="time < 10">
     {{ time > 9 ? "00:" + time : "00:0" + time }}
   </h2>
 </div>

@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { ONE_MIN, ONE_SEC } from '../../constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TimeService {
-  private time$ = new BehaviorSubject<number>(this.currentTime(0));
+  private time$ = new BehaviorSubject<number>(this.currentTime(ONE_MIN));
+  private counter = ONE_MIN;
   constructor() {
     this.startClock();
   }
@@ -14,12 +16,18 @@ export class TimeService {
     return this.time$.asObservable();
   }
 
+  restartTimer() {
+    this.counter = ONE_MIN;
+  }
+
   private startClock() {
-    let ind = 1;
     setInterval(() => {
-      this.time$.next(this.currentTime(ind));
-      ind++;
-    }, 1000);
+      this.time$.next(this.currentTime(this.counter));
+      if (this.counter == 0) {
+        this.restartTimer();
+      }
+      this.counter--;
+    }, ONE_SEC);
   }
 
   private currentTime(ind: number) {

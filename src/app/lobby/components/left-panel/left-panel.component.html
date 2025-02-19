@@ -1,10 +1,9 @@
 <div>
-  <app-board-header
-    [leftPlayerId]="leftPlayerId"
-    [rightPlayerId]="rightPlayerId"
-  ></app-board-header>
+  <app-board-header></app-board-header>
   <div class="container">
-    <h1>Move Turn: {{ nextTurn === "left" ? "White" : "Black" }}</h1>
+    <h2 style="display: flex; justify-content: center" id="move-turn-h2">
+      Move Turn - {{ currentTurn | uppercase }}
+    </h2>
     <form (ngSubmit)="onSubmit()">
       <label for="from">From: </label>
       <input
@@ -23,7 +22,18 @@
         maxlength="2"
       />
       <br />
-      <p-button type="submit" [style]="{ width: '100%' }">Move</p-button>
+      <p-button type="submit" [style]="{ width: '100%' }" id="move-btn"
+        >Move</p-button
+      >
     </form>
+    <br />
+    <p-button
+      id="leave-game-btn"
+      severity="danger"
+      [style]="{ width: '100%' }"
+      (onClick)="stopGame()"
+      [routerLink]="'/chess'"
+      >Leave the game <i class="pi pi-sign-out"></i
+    ></p-button>
   </div>
 </div>

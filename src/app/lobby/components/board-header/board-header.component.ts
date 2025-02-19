@@ -8,6 +8,7 @@ import {
 import { PlayerService } from '../../services/player.service';
 import { TimeService } from '../../services/time.service';
 import { Observable } from 'rxjs';
+import { SessionService } from '../../services/session.service';
 
 @Component({
   selector: 'app-board-header',
@@ -15,31 +16,19 @@ import { Observable } from 'rxjs';
   templateUrl: './board-header.component.html',
   styleUrl: './board-header.component.scss',
 })
-export class BoardHeaderComponent implements OnChanges, OnInit {
-  leftPlayer: string | undefined = 'Left Player';
-  rightPlayer: string | undefined = 'Right Player';
+export class BoardHeaderComponent implements OnInit {
+  leftPlayer: string = 'White Player';
+  rightPlayer: string = 'Black Player';
   time$?: Observable<number>;
-  @Input({ required: true }) leftPlayerId?: string;
-  @Input({ required: true }) rightPlayerId?: string;
-
-  constructor(
-    private playerService: PlayerService,
-    private timeService: TimeService
-  ) {}
+  constructor(private timeService: TimeService) {}
 
   ngOnInit(): void {
-    this.time$ = this.timeService.getTimeObservable();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (this.leftPlayerId && this.rightPlayerId) {
-      this.playerService.getPlayer(this.leftPlayerId).subscribe((player) => {
-        this.leftPlayer = player.username;
-      });
-
-      this.playerService.getPlayer(this.rightPlayerId).subscribe((player) => {
-        this.rightPlayer = player.username;
-      });
+    const players = localStorage.getItem('players');
+    if (players) {
+      const playersObj = JSON.parse(players);
+      this.leftPlayer = playersObj.leftUsername;
+      this.rightPlayer = playersObj.rightUsername;
     }
+    this.time$ = this.timeService.getTimeObservable();
   }
 }

@@ -1,4 +1,4 @@
-import { GameTurnAction } from '../../models/GameTurnAction.enum';
+import { GameTurnAction } from '../../types/GameTurnAction.enum';
 
 export interface GameTurn {
   gameSessionId: string;

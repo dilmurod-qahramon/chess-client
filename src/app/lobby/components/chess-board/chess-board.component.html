@@ -1,40 +1,34 @@
-<div class="body">
-  <app-left-panel [sessionId]="sessionId"></app-left-panel>
+<div class="body" *ngIf="data$ | async as data">
+  <app-left-panel
+    [currentTurn]="data.sessionInfo.currentTurn"
+    (submitForm)="data.submitAction($event)"
+  ></app-left-panel>
   <div class="chess-container">
-    <div class="row-labels">
-      <h2>a</h2>
-      <h2>b</h2>
-      <h2>c</h2>
-      <h2>d</h2>
-      <h2>e</h2>
-      <h2>f</h2>
-      <h2>g</h2>
-      <h2>h</h2>
+    <div class="rowIndex">
+      <h1>a</h1>
+      <h1>b</h1>
+      <h1>c</h1>
+      <h1>d</h1>
+      <h1>e</h1>
+      <h1>f</h1>
+      <h1>g</h1>
+      <h1>h</h1>
     </div>
-    <div class="board-container">
-      <div class="column-labels">
-        <h2>8</h2>
-        <h2>7</h2>
-        <h2>6</h2>
-        <h2>5</h2>
-        <h2>4</h2>
-        <h2>3</h2>
-        <h2>2</h2>
-        <h2>1</h2>
-      </div>
-      <div class="board">
+    <div class="chessboard">
+      <div
+        *ngFor="let row of data.sessionInfo.fieldState; let rowIndex = index"
+        class="row"
+      >
+        <h1 style="margin-right: 10px">{{ 8 - rowIndex }}</h1>
         <div
-          *ngFor="let block of blocks"
-          class="block"
-          [ngClass]="{ dark: isDark(block.index), light: !isDark(block.index) }"
+          *ngFor="let cell of row; let colIndex = index"
+          class="cell"
+          [class.dark]="(rowIndex + colIndex) % 2 === 1"
+          [class.light]="(rowIndex + colIndex) % 2 === 0"
         >
-          <button>
-            <img
-              *ngIf="block.iconUrl"
-              [src]="block.iconUrl"
-              alt="{{ block.piece }}"
-            />
-          </button>
+          <span *ngIf="cell">
+            <img [src]="cell | iconPathPipe" />
+          </span>
         </div>
       </div>
     </div>

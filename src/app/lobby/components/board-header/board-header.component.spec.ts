@@ -8,16 +8,29 @@ describe('BoardHeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BoardHeaderComponent]
-    })
-    .compileComponents();
+      declarations: [BoardHeaderComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(BoardHeaderComponent);
     component = fixture.componentInstance;
+
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create BoardHeaderComponent', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should render players username', () => {
+    component.leftPlayer = 'player1';
+    component.rightPlayer = 'player2';
+    fixture.detectChanges();
+    const h1Element = fixture.nativeElement.querySelector('h1');
+    expect(h1Element.textContent).toEqual('player1 VS player2');
+  });
+
+  it('should display default player usernames', () => {
+    const h1Element = fixture.nativeElement.querySelector('h1');
+    expect(h1Element.textContent).toEqual('player1 VS player2');
   });
 });
