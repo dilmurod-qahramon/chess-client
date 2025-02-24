@@ -7,22 +7,46 @@ import { BoardHeaderComponent } from '../board-header/board-header.component';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
+import { DialogModule } from 'primeng/dialog';
+import { SessionService } from '../../services/session.service';
+import { SideToColorPipe } from '../../pipes/side-to-color.pipe';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClient } from '@angular/common/http';
 
 describe('LeftPanelComponent', () => {
   let component: LeftPanelComponent;
   let fixture: ComponentFixture<LeftPanelComponent>;
   let activatedRouteMock: jasmine.SpyObj<ActivatedRoute>;
+  let mockSessionService: Partial<SessionService>;
+  const httpClientMock = {
+    get: jasmine.createSpy().and.returnValue(of({})),
+    post: jasmine.createSpy().and.returnValue(of({})),
+    patch: jasmine.createSpy().and.returnValue(of({})),
+    put: jasmine.createSpy().and.returnValue(of({})),
+  };
 
   beforeEach(async () => {
     activatedRouteMock = jasmine.createSpyObj('ActivatedRoute', [
       'queryParams',
     ]);
     activatedRouteMock.queryParams = of({ id: 'some-id' });
-
+    mockSessionService = jasmine.createSpyObj('SessionService', [
+      'finishSession',
+    ]);
     await TestBed.configureTestingModule({
-      declarations: [LeftPanelComponent, BoardHeaderComponent],
-      imports: [FormsModule, ButtonModule, InputTextModule, RouterModule],
-      providers: [{ provide: ActivatedRoute, useValue: activatedRouteMock }],
+      declarations: [LeftPanelComponent, BoardHeaderComponent, SideToColorPipe],
+      imports: [
+        FormsModule,
+        ButtonModule,
+        InputTextModule,
+        RouterModule,
+        DialogModule,
+      ],
+      providers: [
+        { provide: HttpClient, useValue: httpClientMock },
+        { provide: ActivatedRoute, useValue: activatedRouteMock },
+        { provide: SessionService, useValue: mockSessionService },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LeftPanelComponent);
@@ -39,7 +63,7 @@ describe('LeftPanelComponent', () => {
     component.currentTurn = 'left';
     fixture.detectChanges();
     const h2Element = fixture.debugElement.query(By.css('#move-turn-h2'));
-    expect(h2Element.nativeElement.textContent).toContain('Move Turn - LEFT');
+    expect(h2Element.nativeElement.textContent).toContain('Move Turn - WHITE');
   });
 
   it('should show an alert on invalid move input', () => {

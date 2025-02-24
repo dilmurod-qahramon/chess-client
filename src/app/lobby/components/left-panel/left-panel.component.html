@@ -2,7 +2,7 @@
   <app-board-header></app-board-header>
   <div class="container">
     <h2 style="display: flex; justify-content: center" id="move-turn-h2">
-      Move Turn - {{ currentTurn | uppercase }}
+      Move Turn - {{ currentTurn | sideToColor | uppercase }}
     </h2>
     <form (ngSubmit)="onSubmit()">
       <label for="from">From: </label>
@@ -31,9 +31,30 @@
       id="leave-game-btn"
       severity="danger"
       [style]="{ width: '100%' }"
-      (onClick)="stopGame()"
-      [routerLink]="'/chess'"
+      (click)="toggleDialog()"
       >Leave the game <i class="pi pi-sign-out"></i
     ></p-button>
   </div>
+</div>
+
+<div class="card flex justify-center">
+  <p-dialog
+    header="Are you sure you want to leave?"
+    [(visible)]="visible"
+    [modal]="true"
+    [style]="{ width: '30vw', }"
+    [draggable]="false"
+    [resizable]="false"
+  >
+    <p>If you leave, the game will be finished!!</p>
+    <p-button
+      label="Leave"
+      variant="outlined"
+      severity="danger"
+      (onClick)="stopGame()"
+      [style]="{ margin: '10px' }"
+    />
+
+    <p-button label="Cancel" variant="outlined" (onClick)="toggleDialog()" />
+  </p-dialog>
 </div>

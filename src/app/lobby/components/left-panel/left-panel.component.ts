@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SessionService } from '../../services/session.service';
 
 @Component({
   selector: 'app-left-panel',
@@ -11,9 +12,18 @@ export class LeftPanelComponent implements OnInit {
   moveFrom: string = '';
   moveTo: string = '';
   sessionId?: string;
+  visible: boolean = false;
   @Input({ required: true }) currentTurn?: 'left' | 'right';
   @Output() submitForm = new EventEmitter<{ from: string; to: string }>();
-  constructor(private activatedRoute: ActivatedRoute) {}
+
+  toggleDialog() {
+    this.visible = !this.visible;
+  }
+  constructor(
+    private sessionService: SessionService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe((params) => {
@@ -28,9 +38,14 @@ export class LeftPanelComponent implements OnInit {
       return;
     }
     this.submitForm.emit({ from: this.moveFrom, to: this.moveTo });
+    this.moveFrom = '';
+    this.moveTo = '';
   }
 
   stopGame() {
-    //set completedAt in session table to true.....
+    this.sessionService.finishSession(this.sessionId!).subscribe((res) => {
+      console.log(res);
+      this.router.navigate(['chess']);
+    });
   }
 }

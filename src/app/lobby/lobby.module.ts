@@ -9,6 +9,8 @@ import { LobbyRoutingModule } from './lobby-routing.module';
 import { BoardHeaderComponent } from './components/board-header/board-header.component';
 import { LeftPanelComponent } from './components/left-panel/left-panel.component';
 import { IconPathPipe } from './pipes/icon-path.pipe';
+import { SideToColorPipe } from './pipes/side-to-color.pipe';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,7 @@ import { IconPathPipe } from './pipes/icon-path.pipe';
     BoardHeaderComponent,
     LeftPanelComponent,
     IconPathPipe,
+    SideToColorPipe,
   ],
   imports: [
     CommonModule,
@@ -24,6 +27,7 @@ import { IconPathPipe } from './pipes/icon-path.pipe';
     InputTextModule,
     FormsModule,
     LobbyRoutingModule,
+    DialogModule,
   ],
 })
 export class LobbyModule {}

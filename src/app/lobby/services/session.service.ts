@@ -35,4 +35,8 @@ export class SessionService {
       }
     );
   }
+
+  finishSession(sessionId: string) {
+    return this.httpClient.patch(`${API_URL}/sessions/${sessionId}`, {});
+  }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SessionService } from '../../services/session.service';
-import { map, Observable, switchMap } from 'rxjs';
+import { catchError, EMPTY, map, Observable, of, switchMap } from 'rxjs';
 import { GameFieldState } from '../../../types/GameFieldState.model';
 import { ChessBoardContext } from '../../../types/ChessboardContext.interface';
 import { GameTurnActions } from '../../../types/GameTurnAction.enum';
@@ -50,13 +50,11 @@ export class ChessBoardComponent implements OnInit {
           null,
         ];
 
-        const updatedSession = this.sessionService
+        this.sessionService
           .updateSessionAndCreateActions(this.sessionId!, gameTurnActions)
-          .pipe(
-            map((updatedSession) => {
-              return updatedSession;
-            })
-          );
+          .subscribe((updatedSession) => {
+            this.data$ = of(this.buildChessBoardContext(updatedSession));
+          });
       },
     };
 
