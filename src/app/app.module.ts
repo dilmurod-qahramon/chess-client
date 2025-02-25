@@ -8,10 +8,11 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 import { LobbyModule } from './lobby/lobby.module';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [AppComponent, NotFoundComponent],
-  imports: [BrowserModule, AppRoutingModule, LobbyModule],
+  imports: [BrowserModule, AppRoutingModule, LobbyModule, AuthModule],
   providers: [
     provideHttpClient(),
     provideAnimationsAsync(),

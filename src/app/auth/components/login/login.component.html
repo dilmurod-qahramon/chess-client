@@ -1,0 +1,43 @@
+<div class="container">
+  <h2>Sign in</h2>
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <!-- <p-inputicon class="pi pi-user" /> -->
+    <div class="field">
+      <label for="username">Enter your username</label>
+      <input
+        pInputText
+        placeholder="username"
+        name="username"
+        [(ngModel)]="username"
+        required
+      />
+    </div>
+
+    <!-- <p-inputicon class="pi pi-lock" /> -->
+    <div class="field">
+      <label for="password">Enter your password</label>
+      <input
+        pInputText
+        placeholder="password"
+        name="password"
+        [(ngModel)]="password"
+        required
+      />
+    </div>
+
+    <p-button
+      label="Log In"
+      severity="contrast"
+      [style]="{ width: '100%' }"
+      [disabled]="!loginForm.valid"
+      (onClick)="onSubmit()"
+    />
+
+    <p-button
+      label="Go to register"
+      severity="contrast"
+      [style]="{ width: '100%' }"
+      [routerLink]="'/auth/register'"
+    />
+  </form>
+</div>
