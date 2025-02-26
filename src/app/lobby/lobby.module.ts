@@ -1,8 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule } from '@angular/forms';
 import { ChessBoardComponent } from './components/chess-board/chess-board.component';
 import { StartMenuComponent } from './components/start-menu/start-menu.component';
 import { LobbyRoutingModule } from './lobby-routing.module';
@@ -10,6 +6,7 @@ import { BoardHeaderComponent } from './components/board-header/board-header.com
 import { LeftPanelComponent } from './components/left-panel/left-panel.component';
 import { IconPathPipe } from './pipes/icon-path.pipe';
 import { SideToColorPipe } from './pipes/side-to-color.pipe';
+import { SharedModule } from '../shared/shared.module';
 import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
@@ -21,13 +18,6 @@ import { DialogModule } from 'primeng/dialog';
     IconPathPipe,
     SideToColorPipe,
   ],
-  imports: [
-    CommonModule,
-    ButtonModule,
-    InputTextModule,
-    FormsModule,
-    LobbyRoutingModule,
-    DialogModule,
-  ],
+  imports: [LobbyRoutingModule, SharedModule, DialogModule],
 })
 export class LobbyModule {}

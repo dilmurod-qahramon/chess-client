@@ -1,4 +1,4 @@
-import { GameFieldState } from '../../types/GameFieldState.model';
+import { GameFieldState } from '../../core/types/GameFieldState.model';
 
 export interface GameSessionDto {
   id?: string;

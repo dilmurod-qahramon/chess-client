@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
+import { AuthGuard } from './auth/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: 'chess',
     loadChildren: () =>
       import('./lobby/lobby.module').then((m) => m.LobbyModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'auth',

@@ -29,11 +29,22 @@
   <h2 *ngIf="errorMesage">
     {{ errorMesage }}
   </h2>
-  <p-button
-    label="Start Game"
-    [variant]="'outlined'"
-    severity="info"
-    size="large"
-    (onClick)="startGame()"
-  />
+  <div class="btns">
+    <p-button
+      label="Start Game"
+      [variant]="'outlined'"
+      severity="info"
+      size="large"
+      [style]="{ width: '300px' }"
+      (onClick)="startGame()"
+    />
+    <p-button
+      label="Log Out"
+      [variant]="'outlined'"
+      severity="danger"
+      size="large"
+      [style]="{ width: '300px' }"
+      (onClick)="logOut()"
+    />
+  </div>
 </div>

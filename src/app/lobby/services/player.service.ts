@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { API_URL } from '../../constants';
+import { API_URL } from '../../core/constants';
 import { PlayerDto } from '../dto/player.dto';
 
 @Injectable({

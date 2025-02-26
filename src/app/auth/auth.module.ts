@@ -7,7 +7,7 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { InputGroupModule } from 'primeng/inputgroup'; // Import this
+import { InputGroupModule } from 'primeng/inputgroup';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent],

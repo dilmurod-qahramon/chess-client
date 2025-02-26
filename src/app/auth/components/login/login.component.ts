@@ -20,11 +20,9 @@ export class LoginComponent {
   ) {}
 
   onSubmit() {
-    this.authService
-      .login(this.username, this.password)
-      .subscribe((access_token) => {
-        this.tokenService.setToken(access_token);
-        this.router.navigate(['chess']);
-      });
+    this.authService.login(this.username, this.password).subscribe((res) => {
+      this.tokenService.setToken(res.access_token);
+      this.router.navigate(['chess']);
+    });
   }
 }

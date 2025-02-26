@@ -22,7 +22,11 @@
         maxlength="2"
       />
       <br />
-      <p-button type="submit" [style]="{ width: '100%' }" id="move-btn"
+      <p-button
+        type="submit"
+        variant="outlined"
+        [style]="{ width: '100%', padding: '12px' }"
+        id="move-btn"
         >Move</p-button
       >
     </form>
@@ -30,7 +34,8 @@
     <p-button
       id="leave-game-btn"
       severity="danger"
-      [style]="{ width: '100%' }"
+      variant="outlined"
+      [style]="{ width: '100%', padding: '12px' }"
       (click)="toggleDialog()"
       >Leave the game <i class="pi pi-sign-out"></i
     ></p-button>
@@ -42,11 +47,13 @@
     header="Are you sure you want to leave?"
     [(visible)]="visible"
     [modal]="true"
-    [style]="{ width: '30vw', }"
+    [style]="{ width: '30vw' }"
     [draggable]="false"
     [resizable]="false"
   >
-    <p>If you leave, the game will be finished!!</p>
+    <p [style]="{ border: '1px solid white', padding: '20px',  }">
+      If you leave, the game will be finished!!
+    </p>
     <p-button
       label="Leave"
       variant="outlined"

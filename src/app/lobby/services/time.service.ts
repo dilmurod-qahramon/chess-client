@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { ONE_MIN, ONE_SEC } from '../../constants';
+import { ONE_MIN, ONE_SEC } from '../../core/constants';
 
 @Injectable({
   providedIn: 'root',

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { GameActor } from '../../types/GameActor.model';
+import { GameActor } from '../../core/types/GameActor.model';
 
 @Pipe({
   name: 'iconPathPipe',

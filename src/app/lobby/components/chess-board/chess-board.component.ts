@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SessionService } from '../../services/session.service';
-import { catchError, EMPTY, map, Observable, of, switchMap } from 'rxjs';
-import { GameFieldState } from '../../../types/GameFieldState.model';
-import { ChessBoardContext } from '../../../types/ChessboardContext.interface';
-import { GameTurnActions } from '../../../types/GameTurnAction.enum';
+import { map, Observable, of, switchMap } from 'rxjs';
 import { GameSessionDto } from '../../dto/game-session.dto';
+import { ChessBoardContext } from '../../../core/types/ChessboardContext.interface';
+import { GameTurnActions } from '../../../core/types/GameTurnAction.enum';
+import { GameFieldState } from '../../../core/types/GameFieldState.model';
 
 @Component({
   selector: 'app-chess-board',

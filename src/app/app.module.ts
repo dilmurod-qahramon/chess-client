@@ -3,18 +3,34 @@ import { BrowserModule } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { provideHttpClient } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withInterceptors,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { providePrimeNG } from 'primeng/config';
-import Aura from '@primeng/themes/aura';
 import { LobbyModule } from './lobby/lobby.module';
-import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { AuthModule } from './auth/auth.module';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from 'primeng/api';
+import Aura from '@primeng/themes/aura';
+import { TokenInterceptor } from './core/interceptors/token.interceptor';
 
 @NgModule({
-  declarations: [AppComponent, NotFoundComponent],
-  imports: [BrowserModule, AppRoutingModule, LobbyModule, AuthModule],
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    LobbyModule,
+    AuthModule,
+    CoreModule,
+    SharedModule,
+  ],
   providers: [
-    provideHttpClient(),
+    provideHttpClient(withInterceptorsFromDi()),
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {

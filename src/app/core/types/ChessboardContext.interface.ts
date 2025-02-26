@@ -1,4 +1,4 @@
-import { GameSessionDto } from '../lobby/dto/game-session.dto';
+import { GameSessionDto } from '../../lobby/dto/game-session.dto';
 
 export interface ChessBoardContext {
   sessionInfo: GameSessionDto;

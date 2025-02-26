@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { PlayerService } from '../../services/player.service';
 import { catchError, EMPTY, forkJoin, switchMap } from 'rxjs';
 import { SessionService } from '../../services/session.service';
+import { TokenService } from '../../../auth/services/token.service';
 
 @Component({
   selector: 'app-main-menu',
@@ -18,7 +19,8 @@ export class StartMenuComponent {
   constructor(
     private router: Router,
     private playerService: PlayerService,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private tokenService: TokenService
   ) {}
 
   startGame() {
@@ -53,5 +55,10 @@ export class StartMenuComponent {
           queryParams: { id: sessionId },
         });
       });
+  }
+
+  logOut() {
+    this.tokenService.removeToken();
+    this.router.navigate(['/auth']);
   }
 }
