@@ -1,8 +1,7 @@
 <div class="container">
-  <h2>Sign in</h2>
+  <h1>Sign in</h1>
   <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-    <!-- <p-inputicon class="pi pi-user" /> -->
-    <div class="field">
+    <div class="form-group">
       <label for="username">Enter your username</label>
       <input
         pInputText
@@ -11,10 +10,18 @@
         [(ngModel)]="username"
         required
       />
+      <div
+        *ngIf="
+          loginForm.controls['username'].touched &&
+          loginForm.controls['username'].invalid
+        "
+        class="text-danger"
+      >
+        Username is required.
+      </div>
     </div>
 
-    <!-- <p-inputicon class="pi pi-lock" /> -->
-    <div class="field">
+    <div class="form-group">
       <label for="password">Enter your password</label>
       <input
         pInputText
@@ -24,10 +31,19 @@
         [(ngModel)]="password"
         required
       />
+      <div
+        *ngIf="
+          loginForm.controls['password'].touched &&
+          loginForm.controls['password'].invalid
+        "
+        class="text-danger"
+      >
+        Password is required.
+      </div>
     </div>
 
     <p-button
-      label="Log In"
+      label="SignIn"
       severity="contrast"
       [style]="{ width: '100%' }"
       [disabled]="!loginForm.valid"
@@ -35,7 +51,7 @@
     />
 
     <p-button
-      label="Go to register"
+      label="REGISTER"
       severity="contrast"
       [style]="{ width: '100%' }"
       [routerLink]="'/auth/register'"

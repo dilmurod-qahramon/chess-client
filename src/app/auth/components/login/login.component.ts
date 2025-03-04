@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { TokenService } from '../../services/token.service';
+import { catchError, EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   standalone: false,
-
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
@@ -20,9 +20,18 @@ export class LoginComponent {
   ) {}
 
   onSubmit() {
-    this.authService.login(this.username, this.password).subscribe((res) => {
-      this.tokenService.setToken(res.access_token);
-      this.router.navigate(['chess']);
-    });
+    this.authService
+      .login(this.username, this.password)
+      .pipe(
+        catchError(() => {
+          alert('Invalid login, please enter correct credentials');
+          return EMPTY;
+        })
+      )
+      .subscribe((res) => {
+        this.tokenService.setAccessToken(res.accessToken);
+        this.tokenService.setRefreshToken(res.refreshToken);
+        this.router.navigate(['chess']);
+      });
   }
 }

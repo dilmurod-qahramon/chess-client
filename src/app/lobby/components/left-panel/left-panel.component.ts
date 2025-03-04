@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SessionService } from '../../services/session.service';
+import { catchError, EMPTY, map } from 'rxjs';
 
 @Component({
   selector: 'app-left-panel',
@@ -43,9 +44,17 @@ export class LeftPanelComponent implements OnInit {
   }
 
   stopGame() {
-    this.sessionService.finishSession(this.sessionId!).subscribe((res) => {
-      console.log(res);
-      this.router.navigate(['chess']);
-    });
+    this.sessionService
+      .finishSession(this.sessionId!)
+      .pipe(
+        catchError((err) => {
+          alert('Something, went wrong, plaese try again.');
+          return EMPTY;
+        })
+      )
+      .subscribe((res) => {
+        console.log(res);
+        this.router.navigate(['chess']);
+      });
   }
 }

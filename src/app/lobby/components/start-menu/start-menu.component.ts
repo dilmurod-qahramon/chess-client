@@ -58,7 +58,8 @@ export class StartMenuComponent {
   }
 
   logOut() {
-    this.tokenService.removeToken();
+    this.tokenService.removeTokens();
+    localStorage.removeItem('players');
     this.router.navigate(['/auth']);
   }
 }

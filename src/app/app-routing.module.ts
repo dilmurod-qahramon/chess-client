@@ -5,6 +5,11 @@ import { AuthGuard } from './auth/guards/auth.guard';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'auth',
+    pathMatch: 'full',
+  },
+  {
     path: 'chess',
     loadChildren: () =>
       import('./lobby/lobby.module').then((m) => m.LobbyModule),

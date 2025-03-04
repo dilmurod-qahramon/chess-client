@@ -1,31 +1,52 @@
 <div class="container">
-  <h2>Register</h2>
+  <h1>Register</h1>
   <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-    <!-- <p-inputicon class="pi pi-user" /> -->
-    <div class="field">
+    <div class="form-group">
       <label for="username">Enter your username</label>
       <input
         pInputText
         placeholder="username"
         name="username"
+        type="text"
         [(ngModel)]="username"
+        minlength="5"
+        maxlength="20"
         required
       />
+      <div
+        *ngIf="
+          loginForm.controls['username'].touched &&
+          loginForm.controls['username'].invalid
+        "
+        class="text-danger"
+      >
+        Name is required.
+      </div>
     </div>
 
-    <div class="field">
-      <label for="password">Enter your email</label>
+    <div class="form-group">
+      <label for="email">Enter your email</label>
       <input
         pInputText
         placeholder="email"
         name="email"
+        type="email"
         [(ngModel)]="email"
         required
+        email
       />
+      <div
+        *ngIf="
+          loginForm.controls['email'].touched &&
+          loginForm.controls['email'].invalid
+        "
+        class="text-danger"
+      >
+        Email is required.
+      </div>
     </div>
 
-    <!-- <p-inputicon class="pi pi-lock" /> -->
-    <div class="field">
+    <div class="form-group">
       <label for="password">Enter your password</label>
       <input
         pInputText
@@ -33,12 +54,23 @@
         name="password"
         type="password"
         [(ngModel)]="password"
+        minlength="5"
+        maxlength="20"
         required
       />
+      <div
+        *ngIf="
+          loginForm.controls['password'].touched &&
+          loginForm.controls['password'].invalid
+        "
+        class="text-danger"
+      >
+        Password is required.
+      </div>
     </div>
 
     <p-button
-      label="Register"
+      label="SignUp"
       severity="contrast"
       [style]="{ width: '100%' }"
       [disabled]="!loginForm.valid"
@@ -46,7 +78,7 @@
     />
 
     <p-button
-      label="Go to login"
+      label="LOGIN"
       severity="contrast"
       [style]="{ width: '100%' }"
       [routerLink]="'/auth/login'"

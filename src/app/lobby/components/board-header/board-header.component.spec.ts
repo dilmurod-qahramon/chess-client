@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { BoardHeaderComponent } from './board-header.component';
 
 describe('BoardHeaderComponent', () => {

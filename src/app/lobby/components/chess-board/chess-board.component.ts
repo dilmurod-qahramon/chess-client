@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SessionService } from '../../services/session.service';
-import { map, Observable, of, switchMap } from 'rxjs';
+import { catchError, EMPTY, map, Observable, of, switchMap } from 'rxjs';
 import { GameSessionDto } from '../../dto/game-session.dto';
-import { ChessBoardContext } from '../../../core/types/ChessboardContext.interface';
-import { GameTurnActions } from '../../../core/types/GameTurnAction.enum';
-import { GameFieldState } from '../../../core/types/GameFieldState.model';
+import { ChessBoardContext } from '../../../core/types/chessboard-context.interface';
+import { GameTurnActions } from '../../../core/types/game-turn-action.enum';
+import { GameFieldState } from '../../../core/types/game-fieldstate.type';
 
 @Component({
   selector: 'app-chess-board',
@@ -52,6 +52,12 @@ export class ChessBoardComponent implements OnInit {
 
         this.sessionService
           .updateSessionAndCreateActions(this.sessionId!, gameTurnActions)
+          .pipe(
+            catchError(() => {
+              alert('Invalid move, please play rightfully.');
+              return EMPTY;
+            })
+          )
           .subscribe((updatedSession) => {
             this.data$ = of(this.buildChessBoardContext(updatedSession));
           });

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_URL } from '../../core/constants';
 import { GameSessionDto } from '../dto/game-session.dto';
-import { GameTurnActions } from '../../core/types/GameTurnAction.enum';
+import { GameTurnActions } from '../../core/types/game-turn-action.enum';
 
 @Injectable({
   providedIn: 'root',
