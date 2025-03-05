@@ -54,7 +54,6 @@ export class TokenInterceptor implements HttpInterceptor {
       switchMap((res) => {
         this.tokenService.setAccessToken(res.accessToken);
         this.tokenService.setRefreshToken(res.refreshToken);
-        console.log(res);
 
         const newAuthReq = req.clone({
           headers: req.headers.append(

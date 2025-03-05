@@ -22,7 +22,6 @@ export class RegisterComponent {
         email: this.email,
       })
       .subscribe((res) => {
-        console.log(res);
         this.router.navigate(['auth']);
       });
   }

@@ -15,7 +15,7 @@
       />
       <div
         *ngIf="
-          loginForm.controls['username'].touched &&
+          loginForm.controls['username']?.touched &&
           loginForm.controls['username'].invalid
         "
         class="text-danger"
@@ -37,7 +37,7 @@
       />
       <div
         *ngIf="
-          loginForm.controls['email'].touched &&
+          loginForm.controls['email']?.touched &&
           loginForm.controls['email'].invalid
         "
         class="text-danger"
@@ -60,7 +60,7 @@
       />
       <div
         *ngIf="
-          loginForm.controls['password'].touched &&
+          loginForm.controls['password']?.touched &&
           loginForm.controls['password'].invalid
         "
         class="text-danger"
@@ -70,7 +70,7 @@
     </div>
 
     <p-button
-      label="SignUp"
+      label="Sign Up"
       severity="contrast"
       [style]="{ width: '100%' }"
       [disabled]="!loginForm.valid"
