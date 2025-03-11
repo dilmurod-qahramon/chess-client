@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { PrimengModule } from './modules/primeng/primeng.module';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const SHARED_MODULES = [CommonModule, FormsModule, ButtonModule, PrimengModule];
 

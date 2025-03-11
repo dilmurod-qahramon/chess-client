@@ -1,0 +1,37 @@
+<div class="container">
+  <h1>All sessions history</h1>
+  <table>
+    <tr>
+      <th>white player</th>
+      <th>black player</th>
+      <th>game started at</th>
+      <th>game complted at</th>
+      <th>actions</th>
+    </tr>
+    <tr *ngFor="let gameHistory of historyOfAllGames">
+      <td>{{ gameHistory.whitePlayer }}</td>
+      <td>{{ gameHistory.blackPlayer }}</td>
+      <td>{{ gameHistory.startedAt | date : "yyyy-MM-dd HH:mm" }}</td>
+      <td>
+        {{
+          (gameHistory.completedAt | date : "yyyy-MM-dd HH:mm") ??
+            "not finished"
+        }}
+      </td>
+      <td>
+        <app-actions
+          [sessionId]="gameHistory.sessionId"
+          [completedAt]="gameHistory.completedAt"
+        ></app-actions>
+      </td>
+    </tr>
+  </table>
+  <br />
+  <p-button
+    [outlined]="true"
+    severity="help"
+    class="lobby-btn"
+    [routerLink]="['/chess']"
+    >Go To Lobby</p-button
+  >
+</div>

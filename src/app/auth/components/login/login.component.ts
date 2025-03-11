@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { TokenService } from '../../services/token.service';
 import { catchError, EMPTY } from 'rxjs';
+import { Roles } from '../../../core/types/roles.enum';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,11 @@ export class LoginComponent {
       .subscribe((res) => {
         this.tokenService.setAccessToken(res.accessToken);
         this.tokenService.setRefreshToken(res.refreshToken);
-        this.router.navigate(['chess']);
+        if (res.roles.includes(Roles.Admin)) {
+          this.router.navigate(['history']);
+        } else {
+          this.router.navigate(['chess']);
+        }
       });
   }
 }

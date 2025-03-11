@@ -3,12 +3,23 @@ import { Injectable } from '@angular/core';
 import { API_URL } from '../../core/constants';
 import { GameSessionDto } from '../dto/game-session.dto';
 import { GameTurnActions } from '../../core/types/game-turn-action.enum';
+import { GameHistoryDto } from '../../game-history/dto/game-history.dto';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SessionService {
   constructor(private httpClient: HttpClient) {}
+
+  getAllSessions() {
+    return this.httpClient.get<GameHistoryDto[]>(`${API_URL}/sessions`);
+  }
+
+  getSession(sessionId: string) {
+    return this.httpClient.get<GameSessionDto>(
+      `${API_URL}/sessions/${sessionId}`
+    );
+  }
 
   initSession(leftPlayerId: string, rightPlayerId: string) {
     return this.httpClient.post(
@@ -18,12 +29,6 @@ export class SessionService {
         rightPlayerId,
       },
       { responseType: 'text' }
-    );
-  }
-
-  getSession(sessionId: string) {
-    return this.httpClient.get<GameSessionDto>(
-      `${API_URL}/sessions/${sessionId}`
     );
   }
 
@@ -38,5 +43,9 @@ export class SessionService {
 
   finishSession(sessionId: string) {
     return this.httpClient.patch(`${API_URL}/sessions/${sessionId}`, {});
+  }
+
+  deleteSession(sessionId: string) {
+    return this.httpClient.delete(`${API_URL}/sessions/${sessionId}`);
   }
 }

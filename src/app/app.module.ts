@@ -16,11 +16,13 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from 'primeng/api';
 import Aura from '@primeng/themes/aura';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
+import { GameHistoryModule } from './game-history/game-history.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    GameHistoryModule,
     AppRoutingModule,
     LobbyModule,
     AuthModule,

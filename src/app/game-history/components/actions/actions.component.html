@@ -1,0 +1,16 @@
+<div class="container">
+  <p-button
+    variant="outlined"
+    severity="primary"
+    (onClick)="finishSession(sessionId!)"
+    [disabled]="completedAt"
+    >finish</p-button
+  >
+  <p-button
+    variant="outlined"
+    severity="danger"
+    (onClick)="deleteSession(sessionId!)"
+    [disabled]="!completedAt"
+    >delete</p-button
+  >
+</div>
