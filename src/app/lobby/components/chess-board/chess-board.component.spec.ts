@@ -1,5 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ChessBoardComponent } from './chess-board.component';
 import { ActivatedRoute } from '@angular/router';
 import { SessionService } from '../../services/session.service';
@@ -7,22 +6,17 @@ import { SessionService } from '../../services/session.service';
 describe('ChessBoardComponent', () => {
   let component: ChessBoardComponent;
   let fixture: ComponentFixture<ChessBoardComponent>;
-  let activatedRouteMock: jasmine.SpyObj<ActivatedRoute>;
-  let sessionServiceMock: jasmine.SpyObj<SessionService>;
 
-  beforeEach(async () => {
-    activatedRouteMock = jasmine.createSpyObj('ActivatedRoute', [
-      'queryParams',
-    ]);
-    sessionServiceMock = jasmine.createSpyObj('SessionService', ['getSession']);
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       declarations: [ChessBoardComponent],
-    }).compileComponents();
+      providers: [ActivatedRoute, SessionService],
+    });
 
     fixture = TestBed.createComponent(ChessBoardComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture.autoDetectChanges();
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
