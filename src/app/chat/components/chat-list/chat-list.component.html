@@ -1,0 +1,14 @@
+<div class="chat-list">
+  <h1>List of Chats</h1>
+  <div
+    *ngFor="let chat of chats"
+    class="chat-item"
+    (click)="selectChat(chat.id)"
+  >
+    <img [src]="chat.profileImage" class="profile-img" alt="Profile" />
+    <div class="chat-info">
+      <h4>{{ chat.name }}</h4>
+      <p>{{ "chat.lastMessage" }}</p>
+    </div>
+  </div>
+</div>

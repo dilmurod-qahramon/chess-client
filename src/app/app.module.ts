@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import {
   HTTP_INTERCEPTORS,
   provideHttpClient,
-  withInterceptors,
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { providePrimeNG } from 'primeng/config';

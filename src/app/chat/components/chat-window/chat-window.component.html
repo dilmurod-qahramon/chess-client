@@ -1,0 +1,20 @@
+<div class="chat-window">
+  <h1>Chat History</h1>
+  <div *ngFor="let message of messages" class="message">
+    <span class="sender">{{ message.userId }}</span>
+    <p class="text">{{ message.text }}</p>
+    <span class="timestamp">{{ message.sentAt }}</span>
+  </div>
+
+  <div *ngFor="let message of messages$ | async" class="message">
+    <span class="sender">{{ message.userId }}</span>
+    <p class="text">{{ message.text }}</p>
+    <span class="timestamp">{{ message.sentAt }}</span>
+  </div>
+</div>
+<div class="message-input">
+  <input #messageInput type="text" placeholder="Type a message..." />
+  <button (click)="sendMessage(messageInput.value); messageInput.value = ''">
+    Send
+  </button>
+</div>

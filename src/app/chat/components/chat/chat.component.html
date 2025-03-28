@@ -1,0 +1,5 @@
+<div class="chat-container">
+  <app-chat-list (chatSelected)="selectChat($event)"></app-chat-list>
+  <app-chat-window [messages]="chat?.messages"></app-chat-window>
+  <app-chat-details [chat]="chat"></app-chat-details>
+</div>
